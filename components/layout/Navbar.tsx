@@ -7,15 +7,15 @@ export default function Navbar() {
   return (
     <header className="bg-transparent sticky">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center min-h-[20dvh]">
+        <div className="flex justify-between items-center min-h-[25dvh]">
           {/* Left side - Name */}
           <div className="flex-shrink-0">
             <Link href="/" className="text-2xl font-bold text-blue-900">
               <Image
                 src="/header-logo.svg"
                 alt="Logo"
-                width={200}
-                height={200}
+                width={300}
+                height={300}
               />
             </Link>
           </div>
