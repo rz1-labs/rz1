@@ -10,10 +10,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-30">
           {/* Left side - Name */}
           <div className="flex-shrink-0">
-            <Link
-              href="/"
-              className="text-2xl font-bold text-blue-900 font-handwriting"
-            >
+            <Link href="/" className="text-2xl font-bold text-blue-900">
               <Image
                 src="/header-logo.svg"
                 alt="Logo"

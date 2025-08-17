@@ -1,21 +1,29 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/layout/Navbar'
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-})
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const poppins = Poppins({
+  variable: '--font-poppins',
+  weight: ['500'],
   subsets: ['latin'],
 })
 
 export const metadata: Metadata = {
   title: 'RZ1 (mdrizwanfk)',
   description: `Rizwan Khan's Portfolio App`,
+  icons: {
+    icon: [
+      {
+        url: '/favicon-light.svg',
+        media: '(prefers-color-scheme: light)',
+      },
+      {
+        url: '/favicon-dark.svg',
+        media: '(prefers-color-scheme: dark)',
+      },
+    ],
+  },
 }
 
 export default function RootLayout({
@@ -25,9 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${poppins.className} antialiased`}>
         <Navbar />
         {children}
       </body>
