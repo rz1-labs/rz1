@@ -35,9 +35,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.variable} antialiased`}>
+      <body className={`min-h-dvh ${poppins.variable} antialiased`}>
         <Navbar />
-        {children}
+        <main className="bg-transparent">{children}</main>
       </body>
     </html>
   )

@@ -1,6 +1,6 @@
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col items-center justify-center p-8">
+    <div className="min-h-[80dvh] flex flex-col items-center justify-center p-8">
       <h1 className="text-6xl font-bold text-gray-800 mb-8 text-center">
         Welcome to RZ1
       </h1>

@@ -5,9 +5,9 @@ import Link from 'next/link'
 
 export default function Navbar() {
   return (
-    <header className="bg-stone-50 border-b border-stone-200">
+    <header className="bg-transparent sticky">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-30">
+        <div className="flex justify-between items-center min-h-[20dvh]">
           {/* Left side - Name */}
           <div className="flex-shrink-0">
             <Link href="/" className="text-2xl font-bold text-blue-900">
