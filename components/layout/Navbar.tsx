@@ -1,22 +1,25 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 
 export default function Navbar() {
   return (
     <header className="bg-stone-50 border-b border-stone-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-30">
           {/* Left side - Name */}
           <div className="flex-shrink-0">
             <Link
               href="/"
               className="text-2xl font-bold text-blue-900 font-handwriting"
             >
-              <div className="leading-tight">
-                <div>RIZWAN FARDEEN</div>
-                <div>KHAN MOHAMMED</div>
-              </div>
+              <Image
+                src="/header-logo.svg"
+                alt="Logo"
+                width={200}
+                height={200}
+              />
             </Link>
           </div>
 
