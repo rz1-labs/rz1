@@ -1,0 +1,56 @@
+name: Deploy to Production
+
+on:
+  workflow_dispatch: # Manual triggering only
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for proper merging
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Checkout env/prod branch
+        run: |
+          git checkout -b env/prod origin/env/prod || git checkout -b env/prod
+
+      - name: Merge main into env/prod
+        run: |
+          git merge origin/main --no-edit
+          if [ $? -ne 0 ]; then
+            echo "Merge conflict detected. Aborting merge."
+            git merge --abort
+            exit 1
+          fi
+
+      - name: Push to origin/env/prod
+        run: |
+          git push origin env/prod
+          if [ $? -ne 0 ]; then
+            echo "Failed to push to env/prod branch"
+            exit 1
+          fi
+
+      - name: Success message
+        run: |
+          echo "Successfully deployed changes from main to env/prod branch"
+
+      - name: Trigger Release Creation
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'create-release.yml',
+              ref: 'main'
+            });
