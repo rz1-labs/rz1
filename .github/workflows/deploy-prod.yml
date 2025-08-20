@@ -6,6 +6,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: write
 
     steps:
       - name: Checkout repository
@@ -13,6 +16,10 @@ jobs:
         with:
           fetch-depth: 0 # Fetch all history for proper merging
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Git credentials
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
 
       - name: Configure Git
         run: |
