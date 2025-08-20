@@ -1,6 +1,12 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --body-bg: #ebe8e2;
+  --grid-color: #c1beb9;
+  --grid-large: 95px;
+  --grid-small: 19px;
+  --grid-large-offset: 3.8000000000000003px;
+  --grid-small-offset: 1.9000000000000001px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,38 +25,110 @@
   --font-sans: 'poppins';
 }
 
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   position: relative;
   color: var(--foreground);
-  background-color: #ebe8e2;
+  background-color: var(--body-bg);
   opacity: 1;
+  padding-top: 25dvh;
   background-image:
     linear-gradient(
-      #c1beb9 3.8000000000000003px,
-      transparent 3.8000000000000003px
+      var(--grid-color) var(--grid-large-offset),
+      transparent var(--grid-large-offset)
     ),
     linear-gradient(
       90deg,
-      #c1beb9 3.8000000000000003px,
-      transparent 3.8000000000000003px
+      var(--grid-color) var(--grid-large-offset),
+      transparent var(--grid-large-offset)
     ),
     linear-gradient(
-      #c1beb9 1.9000000000000001px,
-      transparent 1.9000000000000001px
+      var(--grid-color) var(--grid-small-offset),
+      transparent var(--grid-small-offset)
     ),
     linear-gradient(
       90deg,
-      #c1beb9 1.9000000000000001px,
-      #ebe8e2 1.9000000000000001px
+      var(--grid-color) var(--grid-small-offset),
+      var(--body-bg) var(--grid-small-offset)
     );
   background-size:
-    95px 95px,
-    95px 95px,
-    19px 19px,
-    19px 19px;
+    var(--grid-large) var(--grid-large),
+    var(--grid-large) var(--grid-large),
+    var(--grid-small) var(--grid-small),
+    var(--grid-small) var(--grid-small);
   background-position:
-    -3.8000000000000003px -3.8000000000000003px,
-    -3.8000000000000003px -3.8000000000000003px,
-    -1.9000000000000001px -1.9000000000000001px,
-    -1.9000000000000001px -1.9000000000000001px;
+    calc(-1 * var(--grid-large-offset)) calc(-1 * var(--grid-large-offset)),
+    calc(-1 * var(--grid-large-offset)) calc(-1 * var(--grid-large-offset)),
+    calc(-1 * var(--grid-small-offset)) calc(-1 * var(--grid-small-offset)),
+    calc(-1 * var(--grid-small-offset)) calc(-1 * var(--grid-small-offset));
+}
+
+/* Shrinking header with glassmorphic effect */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 25dvh;
+  background-color: var(--body-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(
+      var(--grid-color) var(--grid-large-offset),
+      transparent var(--grid-large-offset)
+    ),
+    linear-gradient(
+      90deg,
+      var(--grid-color) var(--grid-large-offset),
+      transparent var(--grid-large-offset)
+    ),
+    linear-gradient(
+      var(--grid-color) var(--grid-small-offset),
+      transparent var(--grid-small-offset)
+    ),
+    linear-gradient(
+      90deg,
+      var(--grid-color) var(--grid-small-offset),
+      var(--body-bg) var(--grid-small-offset)
+    );
+  background-size:
+    var(--grid-large) var(--grid-large),
+    var(--grid-large) var(--grid-large),
+    var(--grid-small) var(--grid-small),
+    var(--grid-small) var(--grid-small);
+  background-position:
+    calc(-1 * var(--grid-large-offset)) calc(-1 * var(--grid-large-offset)),
+    calc(-1 * var(--grid-large-offset)) calc(-1 * var(--grid-large-offset)),
+    calc(-1 * var(--grid-small-offset)) calc(-1 * var(--grid-small-offset)),
+    calc(-1 * var(--grid-small-offset)) calc(-1 * var(--grid-small-offset));
+  z-index: -1;
+}
+
+.header.shrink {
+  height: 70px;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  background-color: rgba(235, 232, 226, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.header.shrink::before {
+  filter: blur(3px);
 }
